@@ -1,0 +1,62 @@
+<!-- users_list.html -->
+
+{% extends 'admin_layout.html' %}
+
+{% block title %}User Manage{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <!-- Breadcrumbs -->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'admin_usermanage' %}">Người dùng</a>
+            </li>
+            <li class="breadcrumb-item active">Danh sách</li>
+        </ol>
+
+        <!-- Page Content -->
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Quyền</th>
+                                <th>Trạng thái</th>
+{#                                <th></th>#}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                                <tr>
+                                    <td>{{ user.username }}</td>
+                                    <td>{{ user.permission.name }}</td>
+                                    <td>
+                                        <span class="badge badge-pill badge-primary">
+                                            {% if user.is_locked == 1 %}
+                                                Khóa
+                                            {% else %}
+                                                Hoạt động
+                                            {% endif %}
+                                        </span>
+                                    </td>
+{#                                    <td>#}
+{#                                        {% if user.is_active == 1 %}#}
+{#                                            <a href="{% url 'lock_user' user.id %}"><i class="fas fa-lock ml-2"></i></a>#}
+{#                                        {% else %}#}
+{#                                            <a href="{% url 'unlock_user' user.id %}"><i class="fas fa-unlock ml-2"></i></a>#}
+{#                                        {% endif %}#}
+{#                                        <a href="{% url 'edit_user' user.id %}"><i class="fas fa-edit ml-2"></i></a>#}
+{#                                    </td>#}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

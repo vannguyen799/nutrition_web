@@ -1,0 +1,93 @@
+{% extends 'admin_layout.html' %}
+
+{% block content %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include the Select2 CSS and JS files -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'admin_foodmanage' %}">Món ăn</a>
+            </li>
+            <li class="breadcrumb-item active">Thêm mới</li>
+        </ol>
+
+        <div class="card mx-auto mt-5 mb-5" style="max-width: 70rem;">
+            <div class="card-header">Thông tin món ăn</div>
+            <div class="card-body">
+                <form action="{% url 'admin_addfood' %}" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        {#                        <label class="label" for="inputTitle">Thể loại</label>#}
+                        {#                        <select th:field="*{categoryId}" class="form-control">#}
+                        {#                            <option th:each="category : ${categories}" th:value="${category.id}"#}
+                        {#                                    th:text="${category.categoryName}">#}
+                        {#                            </option>#}
+                        {#                        </select>#}
+                        {#                        <span th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}"#}
+                        {#                              class="text-danger"></span>#}
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label" for="inputTitle">Tên món ăn</label>
+                        <input type="text" maxlength="225" id="inputTitle" name="name"
+                               class="form-control" placeholder="Tên món ăn"
+                               required="required">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label" for="inputTitle">Mô tả</label>
+
+                        <textarea id="inputTitle" name="description" class="form-control" placeholder="Mô tả"
+                                  rows="4" cols="10"></textarea>
+                    </div>
+                    <div class="form-group" style="height: 250px">
+                        <label class="label">Hình ảnh</label>
+                        <br>
+                        <input type="file" accept="image/*" id="inputTitle" name="image"
+                               onchange="show_img_event(event)">
+                        <br>
+                        <img src="" height="200" id="loaded_img" alt="loaded_img">
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label">Thành phần</label>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            <label for="multiSelect">Chọn danh mục:</label>
+                            <select id="multiSelect" class="form-control" name="categories" multiple="multiple">
+                                {% for category in food_category %}
+                                    <option value="{{ category.id }}"> {{ category.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            Công thức
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-block" type="submit">Lưu</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        CKEDITOR.replace('description');
+
+        // Initialize Select2 on the multiSelect element
+        $(document).ready(function () {
+            $('#multiSelect').select2({
+                dropdownSearch: true
+            });
+        });
+    </script>
+{% endblock %}

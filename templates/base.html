@@ -1,0 +1,38 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Website{% endblock %}</title>
+    <!-- Add your CSS and other head elements here -->
+</head>
+<body>
+
+    <header>
+        <h1>{% block header %}My Website{% endblock %}</h1>
+        <!-- Add any other header content or navigation links here -->
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <!-- Add more navigation links as needed -->
+        </ul>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <!-- Add your footer content here -->
+        <p>&copy; 2024 My Website. All rights reserved.</p>
+    </footer>
+
+    <!-- Add your JavaScript and other scripts here -->
+
+</body>
+</html>
