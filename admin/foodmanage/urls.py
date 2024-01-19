@@ -21,8 +21,8 @@ from django.urls import path, include
 urlpatterns = [
         path('', index, name='admin_foodmanage'),
         path('add/', add_food, name='admin_addfood'),
-        path('edit/<int:food_id>/', update_food, name='admin_editfood'''),
-        path('delete/<int:food_id>/', delete_food, name='admin_deletefood'''),
+        path('edit/', update_food, name='admin_editfood'''),
+        path('delete/', delete_food, name='admin_deletefood'''),
         path('category/', manage_food_categories, name='admin_foodcategory'),
         path('category/add/', add_food_category, name='admin_addfoodcategory'),
         path('category/edit/', edit_food_category, name='admin_editfoodcategory'),

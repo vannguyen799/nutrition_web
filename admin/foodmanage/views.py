@@ -17,19 +17,23 @@ def index(request):
 def add_food(request):
     if request.method == 'POST':
         pass
-    print(Foodcategory.objects.all().__str__())
     return render(request, 'admin/foodmanage/add_food.html', context={
         'food_category': Foodcategory.objects.all()
     })
 
 
 @require_admin
-def delete_food(request, food_id):
-    pass
+def delete_food(request):
+    if request.method == 'POST':
+        food_id = request.POST.get('id')
+        Food.objects.filter(id=food_id).delete()
+    return redirect('admin_foodmanage')
+
 
 
 @require_admin
-def update_food(request, food_id):
+def update_food(request):
+    food_id = request.POST.get('id')
     pass
 
 
@@ -69,23 +73,24 @@ def delete_food_category(request, food_category_id):
 
 @require_admin
 def edit_food_category(request):
-    food_category_id = request.GET.get('id')
     if request.method == 'POST':
         try:
+
             image_file = request.FILES.get('image')
             if image_file:
                 image_file.name = f'{timezone.now()}.{image_file.name}'
 
+            food_category_id = request.POST.get('id')
             food_category = Foodcategory.objects.get(pk=food_category_id)
             food_category.name = request.POST.get('name')
             food_category.description = request.POST.get('description')
             food_category.image = image_file
             food_category.save()
-
-            print(f'updated food category successfully {food_category_id}')
             return redirect('admin_foodcategory')
         except Foodcategory.DoesNotExist:
             pass
+
+    food_category_id = request.GET.get('id')
     return render(request, 'admin/foodmanage/edit_food_category.html', context={
         'food_category': Foodcategory.objects.get(pk=food_category_id)
     })

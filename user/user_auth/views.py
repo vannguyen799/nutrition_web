@@ -16,15 +16,15 @@ def login(request):
 
         try:
             user = User.objects.get(username=username, password=password)
-            request.session['user_id'] = user.id
-            request.session['username'] = user.username
-            request.session['email'] = user.email
-            request.session['permission'] = user.permission.name.lower()
-            request.session['user'] = user
-            user.objects.update(is_active=True)
-            messages.success(request, 'Login successful.')
-            print('login successful {}'.format(username))
-            return redirect('home')
+            if not user.is_locked:
+                request.session['user_id'] = user.id
+                request.session['username'] = user.username
+                request.session['email'] = user.email
+                request.session['permission'] = user.permission.name.lower()
+                request.session['user'] = user
+                user.objects.update(is_active=True)
+                messages.success(request, 'Login successful.')
+                return redirect('home')
         except User.DoesNotExist:
             messages.error(request, 'Invalid username or password.')
 
