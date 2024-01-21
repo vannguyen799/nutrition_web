@@ -3,6 +3,7 @@ from django.contrib import messages
 
 from .form import LoginForm
 from .models import *
+from decorator import require
 
 
 # Create your views here.
@@ -36,6 +37,7 @@ def login(request):
     return render(request, 'admin/login.html', {'form': LoginForm()})
 
 
+@require.admin
 def logout(request):
     if 'user_id' in request.session:
         _logout(request)
@@ -44,6 +46,7 @@ def logout(request):
     return redirect('admin_login')  # Redirect to your home page
 
 
+@require.admin
 def _logout(request):
     try:
         if request.session['user_id']:

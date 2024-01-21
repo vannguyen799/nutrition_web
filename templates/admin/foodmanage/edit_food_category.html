@@ -40,9 +40,9 @@
                         <label class="label" for="inputTitle">Id</label>
                         <input type="text" maxlength="225" id="inputTitle" name="id"
                                class="form-control" placeholder="id"
-                               required="required" value="{{ food_category.id }}" disabled>
+                               required="required" value="{{ food_category.id }}" style="display: None;">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group">    
                         <label class="label" for="inputTitle">Tên danh mục</label>
                         <input type="text" maxlength="225" id="inputTitle" name="name"
                                class="form-control" placeholder="Tên danh mục"
@@ -61,7 +61,7 @@
                         <input type="file" accept="image/*" id="inputTitle" name="image"
                                onchange="show_img_event(event)">
                         <br>
-                        <img src="{{ food_category.image }}" height="200" id="loaded_img" alt="loaded_img">
+                        <img src="{{ food_category.image.url }}" height="200" id="loaded_img" alt="loaded_img">
 
                     </div>
 

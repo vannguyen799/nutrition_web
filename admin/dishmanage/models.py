@@ -9,6 +9,7 @@ class Dishcategory(models.Model):
     name = models.CharField(unique=True, max_length=100)
     description = models.TextField(blank=True, null=True)
     dishcategory = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True)
+    image = models.ImageField(upload_to='admin/img/', blank=True, null=True)
 
     class Meta:
         app_label = 'admin.foodmanage'

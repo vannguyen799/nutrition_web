@@ -36,7 +36,6 @@
                                 <th>Tên</th>
                                 <th>Mô tả</th>
                                 <th>Hình Ảnh</th>
-                                <th>Hình Ảnh</th>
 
                             </tr>
                         </thead>
@@ -44,9 +43,14 @@
                             {% for category in food_category %}
                                 <tr>
                                     <td>{{ category.id }}</td>
-                                    <td>{{ category.name }}</td>
+                                     <td>{{ category.name }}</td>
                                     <td>{{ category.description }}</td>
-                                    <td> <img src="{{ category.image.url }}" alt="image_food_category_{{ category.id }}" id="loaded_img"></td>
+                                    <td> {% if category.image %}
+                                        <img width="70" src="{{ category.image.url }}" alt="image_food_category_{{ category.id }}" id="loaded_img">
+                                        {% else %}
+                                        <span> Không có hình ảnh</span>
+                                        {% endif %}
+                                    </td>
                                     <td> <a href="{% url 'admin_editfoodcategory' %}?id={{ category.id }}"> Edit </a></td>
                                     <td> <a href="{% url 'admin_deletefoodcategory' %}?id={{ category.id }}"> Delete </a></td>
 

@@ -1,9 +1,9 @@
 from django.shortcuts import render
 
-from decorator import require_admin
+from decorator import require
 
 
 # Create your views here.
-@require_admin
+@require.admin
 def index(request):
     return render(request, 'admin/dashboard/dashboard.html')

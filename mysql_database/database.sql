@@ -1,22 +1,126 @@
-CREATE TABLE Dish (id int(10) NOT NULL AUTO_INCREMENT, name varchar(100) NOT NULL UNIQUE, image varchar(200) NOT NULL, kcal int(10) NOT NULL, refuse_rate int(11) NOT NULL, description text, DishCategory_id int(10) NOT NULL, PRIMARY KEY (id));
-CREATE TABLE Dish_Nutrient (Dish_id int(10) NOT NULL, Nutrient_id int(10) NOT NULL, PRIMARY KEY (Dish_id, Nutrient_id));
-CREATE TABLE DishCategory (id int(10) NOT NULL AUTO_INCREMENT, name varchar(100) NOT NULL UNIQUE, description text, parrent_id int(10), PRIMARY KEY (id));
-CREATE TABLE Food (id int(10) NOT NULL AUTO_INCREMENT, name varchar(100) NOT NULL UNIQUE, description text, image varchar(200), PRIMARY KEY (id));
-CREATE TABLE Food_Dish (Food_id int(10) NOT NULL, Dish_id int(10) NOT NULL, value real NOT NULL, count int(10) DEFAULT 1 NOT NULL, PRIMARY KEY (Food_id, Dish_id));
-CREATE TABLE Food_FoodCategory (Food_id int(10) NOT NULL, FoodCategory_id int(10) NOT NULL, PRIMARY KEY (Food_id, FoodCategory_id));
-CREATE TABLE FoodArticle (id int(10) NOT NULL AUTO_INCREMENT, content text NOT NULL, Food_id int(10) NOT NULL, time_spend int(11) NOT NULL, created_date datetime NULL, last_update_date datetime NULL, is_published bit(1), PRIMARY KEY (id));
-CREATE TABLE FoodCategory (id int(10) NOT NULL AUTO_INCREMENT, name varchar(100) NOT NULL UNIQUE, description text, PRIMARY KEY (id));
-CREATE TABLE FoodMenu (id int(10) NOT NULL AUTO_INCREMENT, FoodMenuList_id int(10) NOT NULL, for_date datetime NULL, PRIMARY KEY (id));
-CREATE TABLE FoodMenu_Food (FoodMenu_id int(10) NOT NULL, Food_id int(10) NOT NULL, PRIMARY KEY (FoodMenu_id, Food_id));
-CREATE TABLE FoodMenuList (id int(10) NOT NULL AUTO_INCREMENT, name varchar(100) NOT NULL, created_date date NOT NULL, PeopleGroup_id int(10) NOT NULL, PRIMARY KEY (id));
-CREATE TABLE Nutrient (id int(10) NOT NULL AUTO_INCREMENT, name varchar(100) NOT NULL UNIQUE, unit varchar(100) NOT NULL, description text, NutrientCategory_id int(10) NOT NULL, PRIMARY KEY (id));
-CREATE TABLE NutrientCategory (id int(10) NOT NULL AUTO_INCREMENT, name varchar(100) NOT NULL UNIQUE, description text, PRIMARY KEY (id));
-CREATE TABLE People (id int(10) NOT NULL AUTO_INCREMENT, name varchar(100) NOT NULL, height real NOT NULL, weight real NOT NULL, age int(10) NOT NULL, gender bit(1) NOT NULL, relationship varchar(100), PeopleGroup_id int(10) NOT NULL, PRIMARY KEY (id));
-CREATE TABLE PeopleGroup (id int(10) NOT NULL AUTO_INCREMENT, name varchar(100) NOT NULL, User_id int(10) NOT NULL, PRIMARY KEY (id));
-CREATE TABLE Permission (id int(10) NOT NULL AUTO_INCREMENT, name varchar(100) NOT NULL UNIQUE, PRIMARY KEY (id));
-CREATE TABLE `User` (id int(10) NOT NULL AUTO_INCREMENT, username varchar(50) NOT NULL UNIQUE, password varchar(100) NOT NULL, email varchar(100) NOT NULL UNIQUE, phone_number int(20) UNIQUE, created_date datetime NOT NULL, is_locked bit(1) DEFAULT 0 NOT NULL, is_active bit(1), permission_id int(10) NOT NULL, PRIMARY KEY (id));
-CREATE TABLE UserDetail (id int(10) NOT NULL AUTO_INCREMENT, firstname varchar(100) NOT NULL, lastname varchar(100) NOT NULL, address int(10), user_id int(10) NOT NULL, PRIMARY KEY (id));
-ALTER TABLE DishCategory ADD CONSTRAINT FKDishCatego107346 FOREIGN KEY (parrent_id) REFERENCES DishCategory (id);
+CREATE TABLE Dish (
+  id              int(10) NOT NULL AUTO_INCREMENT,
+  name            varchar(100) NOT NULL UNIQUE,
+  image           varchar(200) NOT NULL,
+  kcal            int(10) NOT NULL,
+  refuse_rate     int(11) NOT NULL,
+  description     text,
+  DishCategory_id int(10) NOT NULL,
+  PRIMARY KEY (id));
+CREATE TABLE Dish_Nutrient (
+  Dish_id     int(10) NOT NULL,
+  Nutrient_id int(10) NOT NULL,
+  value       real,
+  PRIMARY KEY (Dish_id,
+  Nutrient_id));
+CREATE TABLE DishCategory (
+  id              int(10) NOT NULL AUTO_INCREMENT,
+  name            varchar(100) NOT NULL UNIQUE,
+  description     text,
+  DishCategory_id int(10),
+  image           varchar(200),
+  PRIMARY KEY (id));
+CREATE TABLE Food (
+  id          int(10) NOT NULL AUTO_INCREMENT,
+  name        varchar(100) NOT NULL UNIQUE,
+  description text,
+  image       varchar(200),
+  PRIMARY KEY (id));
+CREATE TABLE Food_Dish (
+  Food_id int(10) NOT NULL,
+  Dish_id int(10) NOT NULL,
+  value   real NOT NULL,
+  count   int(10) DEFAULT 1 NOT NULL,
+  PRIMARY KEY (Food_id,
+  Dish_id));
+CREATE TABLE Food_FoodCategory (
+  Food_id         int(10) NOT NULL,
+  FoodCategory_id int(10) NOT NULL,
+  PRIMARY KEY (Food_id,
+  FoodCategory_id));
+CREATE TABLE FoodArticle (
+  id               int(10) NOT NULL AUTO_INCREMENT,
+  content          text NOT NULL,
+  Food_id          int(10) NOT NULL,
+  time_spend       int(11) NOT NULL,
+  created_date     datetime NULL,
+  last_update_date datetime NULL,
+  is_published     bit(1),
+  image            varchar(200),
+  PRIMARY KEY (id));
+CREATE TABLE FoodCategory (
+  id          int(10) NOT NULL AUTO_INCREMENT,
+  name        varchar(100) NOT NULL UNIQUE,
+  description text,
+  image       varchar(200),
+  PRIMARY KEY (id));
+CREATE TABLE FoodMenu (
+  id              int(10) NOT NULL AUTO_INCREMENT,
+  FoodMenuList_id int(10) NOT NULL,
+  for_date        datetime NULL,
+  PRIMARY KEY (id));
+CREATE TABLE FoodMenu_Food (
+  FoodMenu_id int(10) NOT NULL,
+  Food_id     int(10) NOT NULL,
+  PRIMARY KEY (FoodMenu_id,
+  Food_id));
+CREATE TABLE FoodMenuList (
+  id             int(10) NOT NULL AUTO_INCREMENT,
+  name           varchar(100) NOT NULL,
+  created_date   date NOT NULL,
+  PeopleGroup_id int(10) NOT NULL,
+  PRIMARY KEY (id));
+CREATE TABLE Nutrient (
+  id                  int(10) NOT NULL AUTO_INCREMENT,
+  name                varchar(100) NOT NULL UNIQUE,
+  unit                varchar(100) NOT NULL,
+  description         text,
+  NutrientCategory_id int(10) NOT NULL,
+  PRIMARY KEY (id));
+CREATE TABLE NutrientCategory (
+  id          int(10) NOT NULL AUTO_INCREMENT,
+  name        varchar(100) NOT NULL UNIQUE,
+  description text,
+  image       varchar(200),
+  PRIMARY KEY (id));
+CREATE TABLE People (
+  id             int(10) NOT NULL AUTO_INCREMENT,
+  name           varchar(100) NOT NULL,
+  height         real NOT NULL,
+  weight         real NOT NULL,
+  age            int(10) NOT NULL,
+  gender         bit(1) NOT NULL,
+  relationship   varchar(100),
+  PeopleGroup_id int(10) NOT NULL,
+  PRIMARY KEY (id));
+CREATE TABLE PeopleGroup (
+  id      int(10) NOT NULL AUTO_INCREMENT,
+  name    varchar(100) NOT NULL,
+  User_id int(10) NOT NULL,
+  PRIMARY KEY (id));
+CREATE TABLE Permission (
+  id   int(10) NOT NULL AUTO_INCREMENT,
+  name varchar(100) NOT NULL UNIQUE,
+  PRIMARY KEY (id));
+CREATE TABLE `User` (
+  id            int(10) NOT NULL AUTO_INCREMENT,
+  username      varchar(50) NOT NULL UNIQUE,
+  password      varchar(100) NOT NULL,
+  email         varchar(100) NOT NULL UNIQUE,
+  phone_number  int(20) UNIQUE,
+  created_date  datetime NOT NULL,
+  is_locked     bit(1) DEFAULT 0 NOT NULL,
+  is_active     bit(1),
+  permission_id int(10) NOT NULL,
+  PRIMARY KEY (id));
+CREATE TABLE UserDetail (
+  id        int(10) NOT NULL AUTO_INCREMENT,
+  firstname varchar(100) NOT NULL,
+  lastname  varchar(100) NOT NULL,
+  address   int(10),
+  user_id   int(10) NOT NULL,
+  PRIMARY KEY (id));
+ALTER TABLE DishCategory ADD CONSTRAINT FKDishCatego774090 FOREIGN KEY (DishCategory_id) REFERENCES DishCategory (id);
 ALTER TABLE FoodMenu_Food ADD CONSTRAINT FKFoodMenu_F471285 FOREIGN KEY (Food_id) REFERENCES Food (id);
 ALTER TABLE FoodArticle ADD CONSTRAINT FKFoodArticl671543 FOREIGN KEY (Food_id) REFERENCES Food (id);
 ALTER TABLE Food_FoodCategory ADD CONSTRAINT FKFood_FoodC728370 FOREIGN KEY (Food_id) REFERENCES Food (id);
