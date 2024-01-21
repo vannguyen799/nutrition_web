@@ -252,7 +252,7 @@ INSERT INTO dish (id, name, image, kcal, refuse_rate, description, dishcategory_
 (null,'Dưa giá (đậu xanh) ','none.img',39.0,5.0,"Mung bean sprouts, salted",16),
 (null,'Hành củ muối ','none.img',22.0,30.0,'Onion salted (allium common garden)',16),
 (null,'Kiệu muối ','none.img',24.0,30.0,'Onion shallot, scallion pickled',16),
-(null,'Cùi dừa già','none.img',16.0,0.0,'Mix pickled from young jack fruit, Mung bean leaves and small ripe eggplant',16),
+(null,'Nhút (dưa muối từ mít, cà, lá đậu xanh)','none.img',16.0,0.0,'Mix pickled from young jack fruit, Mung bean leaves and small ripe eggplant',16),
 (null,'Men bia khô ','none.img',340.0,0.0,"Brewer's yeast, fried enzyme",17),
 (null,'Men bia tươi ','none.img',95.0,0.0,"Baker's yeast compressed",17),
 (null,'Mộc nhĩ ','none.img',304.0,10.0,"Jew's ear, Juda's ear, dried, Wood-ear, Tender variety",17),
