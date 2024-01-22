@@ -11,7 +11,7 @@ class Permission(models.Model):
     class Meta:
         app_label = 'admin_auth'
         managed = False
-        db_table = 'permission'
+        db_table = 'Permission'
 
 
 class User(models.Model):
@@ -27,7 +27,7 @@ class User(models.Model):
     class Meta:
         app_label = 'admin_auth'
         managed = False
-        db_table = 'user'
+        db_table = 'User'
 
     @staticmethod
     def hash_password(password):

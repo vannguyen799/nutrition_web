@@ -12,7 +12,7 @@ class Nutrientcategory(models.Model):
     class Meta:
         app_label = 'admin.nuritentmanage'
         managed = False
-        db_table = 'nutrientcategory'
+        db_table = 'NutrientCategory'
 
 
 class Nutrient(models.Model):
@@ -25,4 +25,4 @@ class Nutrient(models.Model):
     class Meta:
         app_label = 'admin.nutrientmanage'
         managed = False
-        db_table = 'nutrient'
+        db_table = 'Nutrient'

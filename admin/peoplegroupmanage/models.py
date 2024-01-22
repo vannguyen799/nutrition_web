@@ -13,7 +13,7 @@ class Peoplegroup(models.Model):
         app_label = 'admin.foodmanage'
 
         managed = False
-        db_table = 'peoplegroup'
+        db_table = 'PeopleGroup'
 
 class People(models.Model):
     name = models.CharField(max_length=100)
@@ -29,7 +29,7 @@ class People(models.Model):
         app_label = 'admin.foodmanage'
 
         managed = False
-        db_table = 'people'
+        db_table = 'People'
 
 
 

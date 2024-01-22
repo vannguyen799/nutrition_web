@@ -12,7 +12,7 @@ class Foodcategory(models.Model):
         app_label = 'admin.foodmanage'
 
         managed = False
-        db_table = 'foodcategory'
+        db_table = 'FoodCategory'
 
 
 class Food(models.Model):
@@ -24,7 +24,7 @@ class Food(models.Model):
         app_label = 'admin.foodmanage'
 
         managed = False
-        db_table = 'food'
+        db_table = 'Food'
 
 
 class FoodDish(models.Model):
@@ -38,7 +38,7 @@ class FoodDish(models.Model):
         app_label = 'admin.foodmanage'
 
         managed = False
-        db_table = 'food_dish'
+        db_table = 'Food_Dish'
         unique_together = (('food', 'dish'),)
 
 
@@ -52,7 +52,7 @@ class FoodFoodcategory(models.Model):
         app_label = 'admin.foodmanage'
 
         managed = False
-        db_table = 'food_foodcategory'
+        db_table = 'Food_FoodCategory'
         unique_together = (('food', 'foodcategory'),)
 
 
@@ -68,4 +68,4 @@ class Foodarticle(models.Model):
     class Meta:
         app_label = 'admin.foodmanage'
         managed = False
-        db_table = 'foodarticle'
+        db_table = 'FoodArticle'

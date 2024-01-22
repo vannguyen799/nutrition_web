@@ -17,7 +17,8 @@ def login(request):
 
         try:
             user = User.objects.get(username=username, password=password)
-            if user.permission.name.lower() == 'admin' and not user.is_locked:
+            print(user.is_locked)
+            if user.permission.name.lower() == 'admin' and user.is_locked is b'\x00':
                 request.session['user_id'] = user.id
                 request.session['username'] = user.username
                 request.session['email'] = user.email

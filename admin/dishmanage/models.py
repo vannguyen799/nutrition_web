@@ -14,7 +14,7 @@ class Dishcategory(models.Model):
     class Meta:
         app_label = 'admin.foodmanage'
         managed = False
-        db_table = 'dishcategory'
+        db_table = 'DishCategory'
 
 
 class Dish(models.Model):
@@ -29,7 +29,7 @@ class Dish(models.Model):
     class Meta:
         app_label = 'admin.foodmanage'
         managed = False
-        db_table = 'dish'
+        db_table = 'Dish'
 
 
 class DishNutrient(models.Model):
@@ -41,5 +41,5 @@ class DishNutrient(models.Model):
     class Meta:
         app_label = 'admin.foodmanage'
         managed = False
-        db_table = 'dish_nutrient'
+        db_table = 'Dish_Nutrient'
         unique_together = (('dish', 'nutrient'),)

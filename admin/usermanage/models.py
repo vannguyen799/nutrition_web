@@ -13,4 +13,4 @@ class Userdetail(models.Model):
     class Meta:
         app_label = 'usermanage'
         managed = False
-        db_table = 'userdetail'
+        db_table = 'UserDetail'
