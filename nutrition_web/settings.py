@@ -89,27 +89,27 @@ WSGI_APPLICATION = 'nutrition_web.wsgi.application'
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'nw_test_db',
-#         'USER': 'root',
-#         'PASSWORD': 'admin123',
-#         'HOST': 'localhost',  # Set to your MySQL server's host
-#         'PORT': '3306',      # Set to your MySQL server's port
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'freedb_nw_test_db',
-        'USER': 'freedb_admindev',
-        'PASSWORD': '397!UnD5amks#M$',
-        'HOST': 'sql.freedb.tech',  # Set to your MySQL server's host
+        'NAME': 'nw_test_db',
+        'USER': 'root',
+        'PASSWORD': 'admin123',
+        'HOST': 'localhost',  # Set to your MySQL server's host
         'PORT': '3306',      # Set to your MySQL server's port
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'freedb_nw_test_db',
+#         'USER': 'freedb_admindev',
+#         'PASSWORD': '397!UnD5amks#M$',
+#         'HOST': 'sql.freedb.tech',  # Set to your MySQL server's host
+#         'PORT': '3306',      # Set to your MySQL server's port
+#     }
+# }
 
 
 # Password validation

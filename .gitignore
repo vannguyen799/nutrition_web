@@ -1,0 +1,4 @@
+docs
+static/templates
+.gitignore
+/data_crawl

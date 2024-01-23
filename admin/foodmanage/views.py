@@ -4,7 +4,8 @@ from django.utils import timezone
 
 from decorator import require
 from admin.dishmanage.models import Dish
-from admin.foodmanage.models import Food, Foodcategory, FoodFoodcategory, FoodDish, Foodarticle
+from admin.foodmanage.models import Food, Foodcategory, FoodFoodcategory, FoodDish
+from admin.food_article_manage.models import Foodarticle
 
 
 # Create your views here.
@@ -18,43 +19,54 @@ def index(request):
 @require.post_form('name', 'categories')
 def add_food(request):
     context = {
+        'title': 'Thêm món ăn',
         'food_category': Foodcategory.objects.all(),
         'dish': Dish.objects.all()
     }
     if request.method == 'POST':
+        # add food form
         name = request.POST.get('name')
         description = request.POST.get('description')
         image = request.FILES.get('image')
+
+        # add food category form
         categories_id = request.POST.get('categories')
 
+        # add food dish form
         dishes_id = request.POST.get('dishes')
         dish_count = request.POST.get('dish_count')
         dish_value = request.POST.get('dish_value')
 
+        # add food article form
         food_article = request.POST.get('food_article')
+        article_title = request.POST.get('food_article_title')
         is_publish = request.POST.get('is_publish')
         time_spend = request.POST.get('time_spend')
+
         try:
             # add food
             food = Food.objects.create(name=name, description=description, image=image)
             # add category for food
-            for category in categories_id.split(','):
-                FoodFoodcategory.objects.create(food.id, category)
+            if categories_id is not None:
+                for category_id in categories_id.split(','):
+                    FoodFoodcategory.objects.create(food_id=food.id, category_id=category_id)
             # add dish infor for food
-            if dishes_id is not None:
+            if None not in [dishes_id, dish_count, dish_value]:
                 for i in range(len(dishes_id)):
                     FoodDish.objects.create(food_id=food.id, dish_id=dishes_id[i], value=dish_value[i],
                                             count=dish_count[i])
             # add food article
-            Foodarticle.objects.create(
-                food_id=food.id,
-                content=food_article,
-                time_spend=time_spend,
-                created_date=timezone.now(),
-                last_update_date=timezone.now(),
-                is_published=1 if is_publish == 'on' else 0,
-                image=image
-            )
+            if None not in [food_article, article_title]:
+                Foodarticle.objects.create(
+                    food_id=food.id,
+                    title=article_title,
+                    content=food_article,
+                    time_spend=time_spend,
+                    created_date=timezone.now(),
+                    last_update_date=timezone.now(),
+                    is_published=1 if is_publish == 'on' else 0,
+                    image=image
+                )
         except IntegrityError:
             context['message'] = 'Food already exists'
         except Exception as e:

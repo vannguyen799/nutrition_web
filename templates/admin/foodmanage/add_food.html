@@ -1,13 +1,12 @@
-{% extends 'admin_layout.html' %}
-{% load static %}
+{% extends 'admin_layout.html' %} {% load static %} 
 
 {% block script %}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-{% endblock %}
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet"/>
+    <script src="{% static 'js/multi-select-box/multiselect-dropdown.js' %}"></script>
+{% endblock %} 
 
 {% block content %}
-
     <div class="container-fluid">
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
@@ -17,44 +16,31 @@
             <li class="breadcrumb-item active">Thêm mới</li>
         </ol>
 
-        <div class="card mx-auto mt-5 mb-5" style="max-width: 70rem;">
+        <div class="card mx-auto mt-5 mb-5" style="max-width: 70rem">
             <div class="card-header">Thông tin món ăn</div>
             <div class="card-body">
                 <form id="add_food_form" action="{% url 'admin_addfood' %}" method="post" enctype="multipart/form-data">
-
                     {% csrf_token %}
-                    {#                    <div class="form-group">#}
-                    {#                        <label class="label" for="inputTitle">Thể loại</label>#}
-                    {#                        <select th:field="*{categoryId}" class="form-control">#}
-                    {#                            <option th:each="category : ${categories}" th:value="${category.id}"#}
-                    {#                                    th:text="${category.categoryName}">#}
-                    {#                            </option>#}
-                    {#                        </select>#}
-                    {#                        <span th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}"#}
-                    {#                              class="text-danger"></span>#}
-                    {#                    </div>#}
 
                     <div class="form-group">
                         <label class="label" for="inputTitle">Tên món ăn (*)</label>
-                        <input type="text" maxlength="225" id="inputTitle" name="name"
-                               class="form-control" placeholder="Tên món ăn"
-                               required="required">
+                        <input type="text" maxlength="225" id="inputTitle" name="name" class="form-control"
+                               placeholder="Tên món ăn" required="required"/>
                     </div>
 
                     <div class="form-group">
                         <label class="label" for="inputTitle">Mô tả</label>
 
-                        <textarea id="inputTitle" name="description" class="form-control" placeholder="Mô tả"
-                                  rows="4" cols="10"></textarea>
+                        <textarea id="inputTitle" name="description" class="form-control" placeholder="Mô tả" rows="4"
+                                  cols="10"></textarea>
                     </div>
                     <div class="form-group" style="height: 250px">
                         <label class="label">Hình ảnh</label>
-                        <br>
+                        <br/>
                         <input type="file" accept="image/*" id="inputTitle" name="image"
-                               onchange="show_img_event(event)">
-                        <br>
-                        <img src="" height="200" id="loaded_img" alt="loaded_img">
-
+                               onchange="show_img_event(event)"/>
+                        <br/>
+                        <img src="" height="200" id="loaded_img" alt="loaded_img"/>
                     </div>
 
                     <div class="form-group">
@@ -63,123 +49,114 @@
                             <select id="dishSelect" class="form-control" name="dishes" multiple
                                     multiselect-search="true">
                                 {% for dish_ in dish %}
-                                    <option value="{{ dish_.id }}">
-                                        {{ dish_.name }}
-                                    </option>
+                                    <option value="{{ dish_.id }}">{{ dish_.name }}</option>
                                 {% endfor %}
                             </select>
                         </div>
                     </div>
 
                     <div class="form-group">
-
-                        <script src="{% static 'js/multi-select-box/multiselect-dropdown.js' %}"></script>
                         <label for="categorySelect">Chọn danh mục:</label>
                         <select id="categorySelect" class="form-control" name="categories" multiple
                                 multiselect-search="true">
                             {% for category in food_category %}
-                                <option value="{{ category.id }}"> {{ category.name }}</option>
+                                <option value="{{ category.id }}">{{ category.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
+
                     <div class="form-group">
-                        <label for="editor">Hướng dẫn nấu ăn</label> <br>
+                        <label for="editor">Hướng dẫn nấu ăn</label> <br/>
                         <label>
                             Thời gian thực hiện:
-                            <input type="number" name="time_spend" value="0">
+                            <input type="number" name="time_spend" value="0"/>
                         </label>
                         <label>
                             Đăng bài
-                            <input type="checkbox" name="is_publish">
+                            <input type="checkbox" name="is_publish"/>
                         </label>
-                        <input type="text" id="food_article" name="food_article" style="display: none">
+                        <br>
+                        <label>
+                            Tiêu đề:
+                            <input type="text" name="food_article_title"/>
+                        </label>
+                        <input type="hidden" id="food_article" name="food_article"/>
                         <div id="editor"></div>
 
                         <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
                         <script>
-                            var quill = new Quill('#editor', {
-                                theme: 'snow', // 'snow' is a clean theme
-                                placeholder: 'Compose your article...',
+                            var quill = new Quill("#editor", {
+                                theme: "snow", // 'snow' is a clean theme
+                                placeholder: "Compose your article...",
                                 modules: {
-                                    toolbar: [
-                                        ['bold', 'italic', 'underline', 'strike'],
-                                        ['link', 'image', 'video'],
-                                        [{'header': [1, 2, 3, 4, 5, 6, false]}],
-                                        [{'list': 'ordered'}, {'list': 'bullet'}],
-                                        ['clean']
-                                    ]
-                                }
+                                    toolbar: [["bold", "italic", "underline", "strike"], ["link", "image", "video"], [{header: [1, 2, 3, 4, 5, 6, false]}], [{list: "ordered"}, {list: "bullet"}], ["clean"]],
+                                },
                             });
                         </script>
                     </div>
 
                     <button class="btn btn-primary btn-block" type="submit">Lưu</button>
                 </form>
-
             </div>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('loaded')
-            let AddForm = document.getElementById('add_food_form')
-            AddForm.addEventListener('submit', () => {
-                let food_article = document.getElementById("food_article")
-                food_article.value = quill.root.innerHTML
-            })
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log("loaded");
+            let AddForm = document.getElementById("add_food_form");
+            AddForm.addEventListener("submit", () => {
+                let food_article = document.getElementById("food_article");
+                food_article.value = quill.root.innerHTML;
+            });
             //addValueCountInputBox()
-        })
+        });
 
-        window.addEventListener('load', ()=>{
-            setTimeout(addValueCountInputBox, 1000)
-        })
+        window.addEventListener("load", () => {
+            setTimeout(addValueCountInputBox, 1000);
+        });
 
         function createInputNumber(label, name) {
-            let e = document.createElement('input')
-            e.setAttribute('type', 'number')
-            e.setAttribute('name', name);
-            e.setAttribute('style', 'width: 70px')
-            e.setAttribute('value', '0')
-            let e1 = document.createElement('span')
-            e1.innerText = label
+            let e = document.createElement("input");
+            e.setAttribute("type", "number");
+            e.setAttribute("name", name);
+            e.setAttribute("style", "width: 70px");
+            e.setAttribute("value", "0");
+            let e1 = document.createElement("span");
+            e1.innerText = label;
 
-            let ee = document.createElement('div')
-            ee.appendChild(e1)
-            ee.appendChild(e)
-            return ee
+            let ee = document.createElement("div");
+            ee.appendChild(e1);
+            ee.appendChild(e);
+            return ee;
         }
 
         function _handle_input_check(select_element, observer) {
-            let disabled = true
-            if (select_element.getAttribute('class') === 'checked') {
-                disabled = false
+            let disabled = true;
+            if (select_element.getAttribute("class") === "checked") {
+                disabled = false;
             }
             select_element.childNodes.forEach((element_div_input) => {
-                if (element_div_input.tagName === 'DIV') {
-                    console.log('div')
+                if (element_div_input.tagName === "DIV") {
+                    console.log("div");
                     element_div_input.childNodes.forEach((input_node) => {
                         if (disabled) {
-                            input_node.disabled = disabled
+                            input_node.disabled = disabled;
                         } else {
-                            input_node.removeAttribute('disabled')
+                            input_node.removeAttribute("disabled");
                         }
-                    })
+                    });
                 }
-
-            })
+            });
         }
 
         function addValueCountInputBox() {
-            document.querySelector("#dishesSelect > div > div > div").childNodes.forEach(
-                (e) => {
-                    e.appendChild(createInputNumber('Số lượng', 'dish_count'))
-                    e.appendChild(createInputNumber('Khối lượng', 'dish_value'))
-                    _handle_input_check(e, e)
-                    onClassChange(e, (node, observer) => _handle_input_check(node, observer))
-                }
-            )
+            document.querySelector("#dishesSelect > div > div > div").childNodes.forEach((e) => {
+                e.appendChild(createInputNumber("Số lượng", "dish_count"));
+                e.appendChild(createInputNumber("Khối lượng", "dish_value"));
+                _handle_input_check(e, e);
+                onClassChange(e, (node, observer) => _handle_input_check(node, observer));
+            });
         }
-
     </script>
 {% endblock %}
