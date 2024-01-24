@@ -20,16 +20,7 @@
         <div class="card-header">Thông tin danh mục món ăn</div>
         <div class="card-body">
             <form action="{% url 'admin_addfoodcategory' %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %} {#
-                <div class="form-group">
-                    #} {# <label class="label" for="inputTitle">Thể loại</label>#} {#
-                    <select th:field="*{categoryId}" class="form-control">
-                        #} {#
-                        <option th:each="category : ${categories}" th:value="${category.id}" #} {# th:text="${category.categoryName}">#} {#</option>
-                        #} {#</select
-                    >#} {# <span th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}" #} {# class="text-danger"></span>#} {#
-                </div>
-                #}
+                {% csrf_token %}               
 
                 <div class="form-group">
                     <label class="label" for="inputTitle">Tên danh mục</label>

@@ -3,6 +3,6 @@ from .views import *
 from django.urls import path
 
 urlpatterns = [
-        path('', index, name="admin_usermanage"),
+        path('', index, name="usermanage"),
 ]
 

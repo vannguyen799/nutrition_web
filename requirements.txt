@@ -1,8 +1,6 @@
-mysql-connector-python
 Django
 mysqlclient
 selenium
 requests
 beautifulsoup4
 openpyxl
-pandas

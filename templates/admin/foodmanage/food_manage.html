@@ -1,6 +1,6 @@
 <!-- users_list.html -->
 
-{% extends 'admin_layout.html' %} {% block title %}User Manage{% endblock %} {% block content %}
+{% extends 'admin_layout.html' %} {% block title %}Food Manage{% endblock %} {% block content %}
 <section>
     <div class="container-fluid">
         <!-- Breadcrumbs -->
@@ -29,6 +29,8 @@
                                 <th>Mô tả</th>
                                 <th>Hình Ảnh</th>
                                 <th>Danh mục</th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,17 +39,38 @@
                                 <td>{{ food.id }}</td>
                                 <td>{{ food.name }}</td>
                                 <td>{{ food.description }}</td>
-                                <td><img src="{{ food_manage.htmlMEDIA_URL }} {{ food.image }}" alt="image_food_{{ food.id }}" /></td>
+                                <td><img src="{{ food_manage.htmlMEDIA_URL }} {{ food.image }}" alt="image_food_{{ food.id }}" height="70" /></td>
                                 <td>
-                                    {% for ffc in food.foodfoodcategory_set.all %}
-                                    <p>{{ ffc.foodcategory.name }}</p>
+                                    {% for ffc in food.categories %}
+                                        {{ ffc.foodcategory.name }}
                                     <br />
                                     {% endfor %}
                                 </td>
+                                <td> <a href="{% url 'admin_editfood' %}?id={{ food.id }}"> Edit</a></td>
+                                <td> <a href="{% url 'admin_deletefood' %}?id={{ food.id }}"> Delete</a></td>
+
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
+                <span class="current">
+                            Page {{ foods.number }} of {{ foods.paginator.num_pages }}.
+                    <br>
+                </span>
+                <div class="pagination">
+                    
+                        
+                    <span class="step-links">
+                        {% if foods.has_previous %}
+                            <a href="?page=1">&laquo; first</a>
+                            <a href="?page={{ foods.previous_page_number }}">previous</a>
+                        {% endif %}                        
+                        {% if foods.has_next %}
+                            <a href="?page={{ foods.next_page_number }}">next</a>
+                            <a href="?page={{ foods.paginator.num_pages }}">last &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
                 </div>
             </div>
         </div>

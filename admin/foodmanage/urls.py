@@ -19,12 +19,12 @@ from .views import *
 from django.urls import path, include
 
 urlpatterns = [
-        path('', index, name='admin_foodmanage'),
-        path('add/', add_food, name='admin_addfood'),
-        path('edit/', update_food, name='admin_editfood'''),
-        path('delete/', delete_food, name='admin_deletefood'''),
-        path('category/', manage_food_categories, name='admin_foodcategory'),
-        path('category/add/', add_food_category, name='admin_addfoodcategory'),
-        path('category/edit/', edit_food_category, name='admin_editfoodcategory'),
-        path('category/delete/', delete_food_category, name='admin_deletefoodcategory')
+        path('', index, name='foodmanage'),
+        path('add/', add_food, name='addfood'),
+        path('edit/', update_food, name='editfood'),
+        path('delete/', delete_food, name='deletefood'),
+        path('category/', manage_food_categories, name='foodcategorymanage'),
+        path('category/add/', add_food_category, name='addfoodcategory'),
+        path('category/edit/', edit_food_category, name='editfoodcategory'),
+        path('category/delete/', delete_food_category, name='deletefoodcategory')
 ]

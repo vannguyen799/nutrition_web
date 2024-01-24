@@ -120,7 +120,7 @@
             let e = document.createElement("input");
             e.setAttribute("type", "number");
             e.setAttribute("name", name);
-            e.setAttribute("style", "width: 70px");
+            e.setAttribute("style", "width: 70%");
             e.setAttribute("value", "0");
             let e1 = document.createElement("span");
             e1.innerText = label;
@@ -153,7 +153,7 @@
         function addValueCountInputBox() {
             document.querySelector("#dishesSelect > div > div > div").childNodes.forEach((e) => {
                 e.appendChild(createInputNumber("Số lượng", "dish_count"));
-                e.appendChild(createInputNumber("Khối lượng", "dish_value"));
+                e.appendChild(createInputNumber("Khối lượng (g)", "dish_value"));
                 _handle_input_check(e, e);
                 onClassChange(e, (node, observer) => _handle_input_check(node, observer));
             });

@@ -1,18 +1,32 @@
 from sqlite3 import IntegrityError
 from django.shortcuts import render, redirect
 from django.utils import timezone
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from decorator import require
 from admin.dishmanage.models import Dish
 from admin.foodmanage.models import Food, Foodcategory, FoodFoodcategory, FoodDish
-from admin.food_article_manage.models import Foodarticle
+from admin.food_article_manage.models import FoodArticle
+
+item_per_page = 30
 
 
 # Create your views here.
 @require.admin
 def index(request):
     if request.method == 'GET':
-        return render(request, 'admin/foodmanage/food_manage.html', {'foods': Food.objects.all()})
+        foods = Food.objects.all()
+        paginator = Paginator(foods, item_per_page)
+        page = request.GET.get('page')
+
+        try:
+            items = paginator.page(page)
+        except PageNotAnInteger:
+            items = paginator.page(1)
+        except EmptyPage:
+            items = paginator.page(paginator.num_pages)
+
+        return render(request, 'admin/foodmanage/food_manage.html', {'foods': items})
 
 
 @require.admin
@@ -57,7 +71,7 @@ def add_food(request):
                                             count=dish_count[i])
             # add food article
             if None not in [food_article, article_title]:
-                Foodarticle.objects.create(
+                FoodArticle.objects.create(
                     food_id=food.id,
                     title=article_title,
                     content=food_article,
@@ -85,13 +99,21 @@ def delete_food(request):
 
 @require.admin
 def update_food(request):
-    food_id = request.POST.get('id')
-    pass
+    food_id = request.GET.get('id')
+    food = Food.objects.get(id=food_id)
+    return render(request, 'admin/foodmanage/edit_food.html', context={
+        'food': food,
+        'food_category': Foodcategory.objects.all(),
+        'dish': Dish.objects.all(),
+        'food_categories': food.foodfoodcategory_set.all(),
+        'food_dishes': food.fooddish_set.all()
+    })
+
 
 
 @require.admin
 def manage_food_categories(request):
-    return render(request, 'admin/foodmanage/food_category_manage.html', context={
+    return render(request, 'admin/foodmanage/../../templates/admin/food_article/food_category_manage.html', context={
         'food_category': Foodcategory.objects.all()
     })
 

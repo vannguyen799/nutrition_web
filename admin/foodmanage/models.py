@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import ManyToManyField
+
 from admin.admin_auth.models import User
 from admin.dishmanage.models import Dish
 
@@ -22,15 +24,22 @@ class Food(models.Model):
 
     class Meta:
         app_label = 'admin.foodmanage'
-
         managed = False
         db_table = 'Food'
 
+    @property
+    def categories(self):
+        return FoodFoodcategory.objects.filter(food_id=self.pk)
+
+    @property
+    def dishes(self):
+        return FoodDish.objects.filter(food_id=self.pk)
+
 
 class FoodDish(models.Model):
-    food = models.OneToOneField(Food, models.DO_NOTHING, db_column='Food_id',
-                                primary_key=True)  # Field name made lowercase. The composite primary key (Food_id, Dish_id) found, that is not supported. The first column is selected.
-    dish = models.ForeignKey(Dish, models.DO_NOTHING, db_column='Dish_id')  # Field name made lowercase.
+    food = models.ForeignKey(Food, models.DO_NOTHING, db_column='Food_id',
+                             primary_key=True)  # Field name made lowercase. The composite primary key (Food_id, Dish_id) found, that is not supported. The first column is selected.
+    dish = models.ForeignKey(Dish, models.DO_NOTHING, db_column='Dish_id', primary_key=True)  # Field name made lowercase.
     value = models.FloatField()
     count = models.IntegerField()
 
@@ -43,16 +52,18 @@ class FoodDish(models.Model):
 
 
 class FoodFoodcategory(models.Model):
-    food = models.OneToOneField(Food, models.DO_NOTHING, db_column='Food_id',
-                                primary_key=True)  # Field name made lowercase. The composite primary key (Food_id, FoodCategory_id) found, that is not supported. The first column is selected.
+    food = models.ForeignKey(Food, models.DO_NOTHING,
+                             db_column='Food_id',
+                             primary_key=True)  # Field name made lowercase. The composite primary key (Food_id, FoodCategory_id) found, that is not supported. The first column is selected.
     foodcategory = models.ForeignKey(Foodcategory, models.DO_NOTHING,
-                                     db_column='FoodCategory_id')  # Field name made lowercase.
+                                     db_column='FoodCategory_id', primary_key=True)  # Field name made lowercase.
 
     class Meta:
         app_label = 'admin.foodmanage'
 
         managed = False
         db_table = 'Food_FoodCategory'
-        unique_together = (('food', 'foodcategory'),)
-
-
+        # unique_together = (('food', 'foodcategory'),)
+        constraints = [
+            models.UniqueConstraint(fields=['food', 'foodcategory'], name='unique_food_foodcategory')
+        ]

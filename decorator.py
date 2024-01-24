@@ -72,15 +72,15 @@ class require:
             def wrapper(request, *args, **kwargs):
                 if request.method == method.upper():
                     params = None
-                    # match request.method:
-                    #     case 'POST':
-                    #         params = request.POST
-                    #     case 'GET':
-                    #         params = request.GET
-                    #     case 'PUT':
-                    #         params = request.PUT
-                    #     case 'DELETE':
-                    #         params = request.DELETE
+                    match request.method:
+                        case 'POST':
+                            params = request.POST
+                        case 'GET':
+                            params = request.GET
+                        case 'PUT':
+                            params = request.PUT
+                        case 'DELETE':
+                            params = request.DELETE
 
                     for name in field_name:
                         if name not in params:

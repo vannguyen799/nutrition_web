@@ -4,7 +4,7 @@ from admin.foodmanage.models import Food
 
 
 # Create your models here.
-class Foodarticle(models.Model):
+class FoodArticle(models.Model):
     content = models.TextField()
     food = models.ForeignKey(Food, models.DO_NOTHING, db_column='Food_id')  # Field name made lowercase.
     time_spend = models.IntegerField()
@@ -15,6 +15,6 @@ class Foodarticle(models.Model):
     image = models.ImageField(upload_to='admin/img/', blank=True, null=True)
 
     class Meta:
-        app_label = 'admin.foodmanage'
+        app_label = 'admin.food_article_manage'
         managed = False
         db_table = 'FoodArticle'

@@ -1,0 +1,101 @@
+{% extends 'admin_layout.html' %} {% load static %}
+
+{% block script %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet"/>
+{#    <script src="{% static 'js/multi-select-box/multiselect-dropdown.js' %}"></script>#}
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'admin_food_article_manage' %}">Bài viết</a>
+            </li>
+            <li class="breadcrumb-item active">Edit</li>
+        </ol>
+
+        <div class="card mx-auto mt-5 mb-5" style="max-width: 70rem">
+            <div class="card-header">Thông tin bài viết</div>
+            <div class="card-body">
+                <form id="add_food_form" action="{% url 'admin_edit_article' %}" method="post"
+                      enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label class="label" for="inputTitle">Id(*)</label>
+                        <input type="text" maxlength="225" id="inputTitle" class="form-control"
+                               required="required" value="{{ article.id }}" disabled/>
+                        <input type="hidden" name="id" value="{{ article.id }}">
+                    </div>
+                    <div class="form-group">
+                        <label class="label" for="inputTitle">Tên món ăn (*)</label>
+                        <input type="text" maxlength="225" id="inputTitle" class="form-control"
+                               placeholder="Tên món ăn" required="required" value="{{ article.food.name }}" disabled>
+                    </div>
+
+
+{#                    <div class="form-group" style="height: 250px">#}
+{#                        <label class="label">Hình ảnh</label>#}
+{#                        <br/>#}
+{#                        <input type="file" accept="image/*" id="inputTitle" name="image"#}
+{#                               onchange="show_img_event(event)"/>#}
+{#                        <br/>#}
+{#                        <img src="{{ food.image.url }}" height="200" id="loaded_img" alt="loaded_img"/>#}
+{#                    </div>#}
+
+                    <div class="form-group">
+                        <label for="editor">Hướng dẫn nấu ăn</label> <br/>
+                        <label>
+                            Thời gian thực hiện:
+                            <input type="number" name="time_spend" value="{{ article.time_spend }}"/>
+                        </label>
+                        <label>
+                            Đăng bài
+                            <input type="checkbox" name="is_publish" {% if article.is_published %} checked {% endif %}/>
+                        </label>
+                        <br>
+                        <label>
+                            Tiêu đề:
+                            <input type="text" name="food_article_title" value="{{ article.title }}" style="width: 1000px"/>
+                        </label>
+                        <input type="hidden" id="food_article" name="food_article" value="{{ article.content }}"/>
+
+                    <br>
+                                        <br>
+
+                        <div id="editor"></div>
+
+                        <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+                        <script>
+                            var quill = new Quill("#editor", {
+                                theme: "snow", // 'snow' is a clean theme
+                                placeholder: "Compose your article...",
+                                modules: {
+                                    toolbar: [["bold", "italic", "underline", "strike"], ["link", "image", "video"], [{header: [1, 2, 3, 4, 5, 6, false]}], [{list: "ordered"}, {list: "bullet"}], ["clean"]],
+                                }
+                            });
+                                        let cnt = document.getElementById("food_article").value
+            quill.clipboard.dangerouslyPasteHTML(cnt);
+                        </script>
+                    </div>
+
+                    <button class="btn btn-primary btn-block" type="submit">Lưu</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let AddForm = document.getElementById("add_food_form");
+            AddForm.addEventListener("submit", () => {
+                let food_article = document.getElementById("food_article");
+                food_article.value = quill.root.innerHTML;
+            });
+
+            //addValueCountInputBox()
+        });
+    </script>
+{% endblock %}

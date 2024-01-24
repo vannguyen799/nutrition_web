@@ -47,6 +47,7 @@ CREATE TABLE FoodArticle (
   last_update_date datetime NULL,
   is_published     bit(1),
   image            varchar(200),
+  title            varchar(200),
   PRIMARY KEY (id));
 CREATE TABLE FoodCategory (
   id          int(10) NOT NULL AUTO_INCREMENT,

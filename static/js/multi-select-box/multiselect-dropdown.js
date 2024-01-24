@@ -154,21 +154,35 @@ function MultiselectDropdown(options){
       Array.from(el.options).map(o=>{
         var op=newEl('div',{class:o.selected?'checked':'',optEl:o, "data-info": o.attributes['value'].value})
         var ic=newEl('input',{type:'checkbox',checked:o.selected});
+        let lb = newEl('label',{text:o.text})
+        lb.setAttribute('style', 'width: 90%;')
         op.appendChild(ic);
-        op.appendChild(newEl('label',{text:o.text}));
+        op.appendChild(lb);
 
-        op.addEventListener('click',()=>{
+        // op.addEventListener('click',()=>{
+        //   op.classList.toggle('checked');
+        //   op.querySelector("input").checked=!op.querySelector("input").checked;
+        //   op.optEl.selected=!!!op.optEl.selected;
+        //   el.dispatchEvent(new Event('change'));
+        // });
+        ic.addEventListener('click',(ev)=>{
+          ic.checked=!ic.checked;
+          op.classList.toggle('checked');
+          op.querySelector("input[type='checkbox']").checked=!op.querySelector("input[type='checkbox']").checked;
+          op.optEl.selected=!!!op.optEl.selected;
+          el.dispatchEvent(new Event('change'));
+        });
+        lb.addEventListener('click', () => {
           op.classList.toggle('checked');
           op.querySelector("input").checked=!op.querySelector("input").checked;
           op.optEl.selected=!!!op.optEl.selected;
           el.dispatchEvent(new Event('change'));
-        });
-        ic.addEventListener('click',(ev)=>{
-          ic.checked=!ic.checked;
-        });
+        })
         o.listitemEl=op;
         list.appendChild(op);
       });
+
+
       div.listEl=listWrap;
 
       div.refresh=()=>{
@@ -201,8 +215,8 @@ function MultiselectDropdown(options){
 
     div.addEventListener('click',()=>{
       div.listEl.style.display='block';
-      search.focus();
-      search.select();
+      // search.focus();
+      // search.select();
     });
 
     document.addEventListener('click', function(event) {

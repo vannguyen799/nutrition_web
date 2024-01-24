@@ -23,7 +23,7 @@ from admin import urls as admin_urls
 from user import urls as user_urls
 
 urlpatterns = [
-    path('', include(user_urls)),
-    path('admin/', include(admin_urls)),
+    path('', include(("user.urls", 'user'), namespace='user')),
+    path('admin/', include(('admin.urls', 'admin'), namespace='admin')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
