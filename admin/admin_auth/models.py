@@ -19,10 +19,14 @@ class User(models.Model):
     password = models.CharField(max_length=100)
     email = models.CharField(unique=True, max_length=100)
     phone_number = models.IntegerField(unique=True, blank=True, null=True)
-    created_date = models.DateTimeField()
-    is_locked = models.BinaryField(default=0)  # This field type is a guess.
-    is_active = models.BinaryField(blank=True, null=True)  # This field type is a guess.
+    created_date = models.DateTimeField(auto_now_add=True)
+    is_locked = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False)
     permission = models.ForeignKey(Permission, models.DO_NOTHING)
+    firstname = models.CharField(max_length=100, default='unknown')
+    lastname = models.CharField(max_length=100, default='unknown')
+    address = models.CharField(max_length=100, default='unknown')
+
 
     class Meta:
         app_label = 'admin_auth'

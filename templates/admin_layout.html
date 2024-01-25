@@ -61,7 +61,7 @@
                         {% endif %}
                     </li>
 
-                    <li>&nbsp;&nbsp;<a href="{% url 'admin_logout' %}">Đăng xuất</a></li>
+                    <li>&nbsp;&nbsp;<a href="{% url 'admin:logout' %}">Đăng xuất</a></li>
                 </ul>
             </div>
         </nav>
@@ -71,23 +71,23 @@
             <ul class="sidebar navbar-nav">
                 <!-- Your existing sidebar content here -->
                 <li class="nav-item">
-                    <a class="nav-link active" href="{% url 'admin_dashboard' %}">
+                    <a class="nav-link active" href="{% url 'admin:dashboard' %}">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'admin_usermanage' %}">
+                    <a class="nav-link" href="{% url 'admin:usermanage' %}">
                         <i class="fas fa-fw fa-newspaper"></i>
                         <span>Quản lý tài khoản</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'admin_foodmanage' %}">
+                    <a class="nav-link" href="{% url 'admin:foodmanage' %}">
                         <i class="fas fa-fw fa-user"></i>
                         <span>Quản lý món ăn</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'admin_food_article_manage' %}">
+                    <a class="nav-link" href="{% url 'admin:foodarticlemanage' %}">
                         <i class="fas fa-fw fa-user"></i>
                         <span>Quản lý công thức nấu ăn</span></a>
                 </li>

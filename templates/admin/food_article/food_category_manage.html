@@ -6,10 +6,10 @@
         <!-- Breadcrumbs -->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{% url 'admin_foodmanage' %}">Món ăn</a>
+                <a href="{% url 'admin:foodmanage' %}">Món ăn</a>
             </li>
             <li class="breadcrumb-item">
-                <a href="{% url 'admin_foodcategory' %}">Danh mục</a>
+                <a href="{% url 'admin:foodcategorymanage' %}">Danh mục</a>
             </li>
             <li class="breadcrumb-item active">Danh sách</li>
         </ol>
@@ -18,7 +18,7 @@
         <div class="card mb-3">
             <div class="card-header">
                 <div class="row">
-                    <a class="btn btn-primary text-end" href="{% url 'admin_addfoodcategory' %}"><i class="fas fa-plus"></i> Thêm mới</a>
+                    <a class="btn btn-primary text-end" href="{% url 'admin:addfoodcategory' %}"><i class="fas fa-plus"></i> Thêm mới</a>
                 </div>
             </div>
             <div class="card-body">
@@ -45,8 +45,8 @@
                                     <span> Không có hình ảnh</span>
                                     {% endif %}
                                 </td>
-                                <td><a href="{% url 'admin_editfoodcategory' %}?id={{ category.id }}"> Edit </a></td>
-                                <td><a href="{% url 'admin_deletefoodcategory' %}?id={{ category.id }}"> Delete </a></td>
+                                <td><a href="{% url 'admin:editfoodcategory' %}?id={{ category.id }}"> Edit </a></td>
+                                <td><a href="{% url 'admin:deletefoodcategory' %}?id={{ category.id }}"> Delete </a></td>
                             </tr>
                             {% endfor %}
                         </tbody>

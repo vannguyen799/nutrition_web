@@ -16,11 +16,7 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.urls import path, include
-# from django.contrib import admin
-
 from nutrition_web import settings
-from admin import urls as admin_urls
-from user import urls as user_urls
 
 urlpatterns = [
     path('', include(("user.urls", 'user'), namespace='user')),

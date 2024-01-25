@@ -6,7 +6,7 @@
         <!-- Breadcrumbs -->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{% url 'admin_foodmanage' %}">Món ăn</a>
+                <a href="{% url 'admin:foodmanage' %}">Món ăn</a>
             </li>
             <li class="breadcrumb-item active">Danh sách</li>
         </ol>
@@ -15,8 +15,8 @@
         <div class="card mb-3">
             <div class="card-header">
                 <div class="row">
-                    <a class="btn btn-primary text-end" href="{% url 'admin_addfood' %}"><i class="fas fa-plus"></i> Thêm mới</a>
-                    <a class="btn btn-primary text-end" href="{% url 'admin_foodcategory' %}"><i class="fas fa-plus"></i> Danh mục</a>
+                    <a class="btn btn-primary text-end" href="{% url 'admin:addfood' %}"><i class="fas fa-plus"></i> Thêm mới</a>
+                    <a class="btn btn-primary text-end" href="{% url 'admin:foodcategorymanage' %}"><i class="fas fa-plus"></i> Danh mục</a>
                 </div>
             </div>
             <div class="card-body">
@@ -46,8 +46,8 @@
                                     <br />
                                     {% endfor %}
                                 </td>
-                                <td> <a href="{% url 'admin_editfood' %}?id={{ food.id }}"> Edit</a></td>
-                                <td> <a href="{% url 'admin_deletefood' %}?id={{ food.id }}"> Delete</a></td>
+                                <td> <a href="{% url 'admin:editfoodcategory' %}?id={{ food.id }}"> Edit</a></td>
+                                <td> <a href="{% url 'admin:deletefood' %}?id={{ food.id }}"> Delete</a></td>
 
                             </tr>
                             {% endfor %}

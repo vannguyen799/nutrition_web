@@ -11,7 +11,7 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{% url 'admin_foodmanage' %}">Món ăn</a>
+                <a href="{% url 'admin:foodmanage' %}">Món ăn</a>
             </li>
             <li class="breadcrumb-item active">Edit</li>
         </ol>
@@ -19,7 +19,7 @@
         <div class="card mx-auto mt-5 mb-5" style="max-width: 70rem">
             <div class="card-header">Thông tin món ăn</div>
             <div class="card-body">
-                <form id="add_food_form" action="{% url 'admin_editfood' %}" method="post"
+                <form id="add_food_form" action="{% url 'admin:editfood' %}" method="post"
                       enctype="multipart/form-data">
                     {% csrf_token %}
 

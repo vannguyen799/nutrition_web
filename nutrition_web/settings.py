@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'nutrition_web.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'nw_test_db',
+        'NAME': 'nw_3',
         'USER': 'root',
         'PASSWORD': 'admin123',
         'HOST': 'localhost',  # Set to your MySQL server's host

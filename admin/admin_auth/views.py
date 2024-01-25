@@ -10,7 +10,7 @@ from decorator import require
 
 def login(request):
     if request.session.get('permission') == 'admin':
-        return redirect('admin_dashboard')
+        return redirect('admin:dashboard')
     if request.method == 'POST':
         username = request.POST['username']
         password = User.hash_password(request.POST['password'])
@@ -30,7 +30,7 @@ def login(request):
 
                 messages.success(request, 'Login successful.')
                 print('login successful {}'.format(username))
-                return redirect('admin_dashboard')
+                return redirect('admin:dashboard')
             messages.error(request, 'Dont have permission')
         except User.DoesNotExist:
             messages.error(request, 'Invalid username or password.')

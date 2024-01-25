@@ -35,11 +35,23 @@ class Food(models.Model):
     def dishes(self):
         return FoodDish.objects.filter(food_id=self.pk)
 
+    @property
+    def category_name(self):
+        return self.categories.first().foodcategory.name
+
+    @property
+    def image_url(self):
+        if self.image.__str__().startswith('http'):
+            return self.image
+        else:
+            return self.image.url
+
 
 class FoodDish(models.Model):
     food = models.ForeignKey(Food, models.DO_NOTHING, db_column='Food_id',
                              primary_key=True)  # Field name made lowercase. The composite primary key (Food_id, Dish_id) found, that is not supported. The first column is selected.
-    dish = models.ForeignKey(Dish, models.DO_NOTHING, db_column='Dish_id', primary_key=True)  # Field name made lowercase.
+    dish = models.ForeignKey(Dish, models.DO_NOTHING, db_column='Dish_id',
+                             primary_key=True)  # Field name made lowercase.
     value = models.FloatField()
     count = models.IntegerField()
 

@@ -27,7 +27,7 @@
     <div class="card card-login mx-auto mt-5">
         <div class="card-header">Đăng nhập</div>
         <div class="card-body">
-            <form action="{% url 'admin_login' %}"  method="post">
+            <form action="{% url 'admin:login' %}"  method="post">
                 {% csrf_token %}
 {#                {{ form.as_p }}#}
                  <div class="form-group">
