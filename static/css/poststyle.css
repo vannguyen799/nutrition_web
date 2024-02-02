@@ -1,0 +1,66 @@
+        .aligncenter {
+            width: 500px;
+            height: auto;
+            border: 2px solid #333;
+            display: block; /* Ensures proper spacing if placed within text */
+            margin: 0 auto;
+        }
+
+        .wrapper {
+            font-family: "Roboto", sans-serif;
+        }
+
+        .wrapper h2 {
+            font-family: "Roboto", sans-serif;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 7px;
+            margin-top: 7px;
+            color: #c47826;
+        }
+
+        .wrapper h3 {
+            font-family: "Roboto", sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 7px;
+            margin-top: 7px;
+                        color: #c47826;
+
+        }
+
+        .wrapper h4 {
+            font-family: "Roboto", sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+            /*{#margin-bottom: 7px;#}*/
+            /*{#margin-top: 7px;#}*/
+            color: #c47826;
+
+        }
+
+        .wrapper p {
+            font-family: "Roboto", sans-serif;
+            font-size: 15px;
+            color: black;
+
+        }
+
+        .wrapper p em {
+            color: #444444;
+        }
+
+        .wrapper strong {
+            font-family: "Roboto", sans-serif;
+
+        }
+
+        .wrapper ul {
+            padding-left: 20px;
+            font-size: 15px;
+
+        }
+
+        .wrapper ul li {
+
+        }

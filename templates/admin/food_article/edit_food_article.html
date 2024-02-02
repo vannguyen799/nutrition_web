@@ -47,6 +47,9 @@
 
                     <div class="form-group">
                         <label for="editor">Hướng dẫn nấu ăn</label> <br/>
+                    <div>
+                        <a href="{% url 'user:articleview' slug_id=article.slug_id %}" target="_blank">Xem bài viết</a>
+                    </div>
                         <label>
                             Thời gian thực hiện:
                             <input type="number" name="time_spend" value="{{ article.time_spend }}"/>

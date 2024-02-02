@@ -46,7 +46,7 @@
                                     <br />
                                     {% endfor %}
                                 </td>
-                                <td> <a href="{% url 'admin:editfoodcategory' %}?id={{ food.id }}"> Edit</a></td>
+                                <td> <a href="{% url 'admin:editfood' %}?id={{ food.id }}"> Edit</a></td>
                                 <td> <a href="{% url 'admin:deletefood' %}?id={{ food.id }}"> Delete</a></td>
 
                             </tr>

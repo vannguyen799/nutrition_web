@@ -37,7 +37,7 @@
                                 {#                                    <a href="#" class="google"><i class="fa fa-google"></i></a>#}
                                 {#                                </div>#}
                                 {#                                <div class="divide">or</div>#}
-                                <form action="{% url 'user:register' %}" method="post" id="register">
+                                <form action="{% url 'user:register' %}{% if 'next' in request.GET  %}?next={{ request.GET.next }}{% endif %}" method="post" id="register">
                                     {% csrf_token %}
                                     <input type="text" placeholder="Họ" name="lastname" minlength="3" required maxlength="30">
                                     <input type="text" placeholder="Tên" name="firstname" minlength="3" required maxlength="30">
@@ -100,7 +100,7 @@
                                 {#                                    <a href="#" class="google"><i class="fa fa-google"></i></a>#}
                                 {#                                </div>#}
                                 <div class="divide">or</div>
-                                <form action="{% url 'user:login' %}" method="post">
+                                <form action="{{ request.build_absolute_uri }}" method="post">
                                     {% csrf_token %}
                                     <input type="text" name="username" placeholder="User Name*" minlength="5">
                                     <input type="password" name="password" placeholder="Password" minlength="5">

@@ -113,7 +113,7 @@ def update_food(request):
 
 @require.admin
 def manage_food_categories(request):
-    return render(request, 'admin/foodmanage/../../templates/admin/food_article/food_category_manage.html', context={
+    return render(request, 'admin/foodmanage/food_category_manage.html', context={
         'food_category': Foodcategory.objects.all()
     })
 

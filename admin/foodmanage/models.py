@@ -3,6 +3,7 @@ from django.db.models import ManyToManyField
 
 from admin.admin_auth.models import User
 from admin.dishmanage.models import Dish
+# from admin.food_article_manage.models import FoodArticle
 
 
 class Foodcategory(models.Model):
@@ -29,7 +30,7 @@ class Food(models.Model):
 
     @property
     def categories(self):
-        return FoodFoodcategory.objects.filter(food_id=self.pk)
+        return FoodFoodcategory.objects.filter(food_id=self.pk).all()
 
     @property
     def dishes(self):
@@ -45,6 +46,10 @@ class Food(models.Model):
             return self.image
         else:
             return self.image.url
+
+    @property
+    def get_foodarticle(self):
+        return self.foodarticle_set.first()
 
 
 class FoodDish(models.Model):

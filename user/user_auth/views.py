@@ -5,6 +5,8 @@ from django.contrib import messages
 from .models import *
 
 from .form import RegisterForm
+
+
 # Create your views here.
 
 def login(request):
@@ -25,7 +27,13 @@ def login(request):
             # request.session['user'] = user
             # user.objects.update(is_active=1)
             messages.success(request, 'Login successful.')
-            return redirect('user:home')
+
+            print(request.GET.get('next'))
+            if request.GET.get('next') is not None:
+                return redirect(request.GET.get('next'))
+            else:
+                return redirect('user:home')
+
         except User.DoesNotExist:
             messages.error(request, 'Invalid username or password.')
 
@@ -61,7 +69,6 @@ def logout(request):
     return redirect(to='user:home')  # Redirect to your home page
 
 
-
 def _logout(request):
     try:
         User.objects.get(pk=request.session['user_id']).objects.update(is_active=False)
@@ -75,5 +82,3 @@ def _logout(request):
         del request.session['user']
     except KeyError:
         pass
-
-

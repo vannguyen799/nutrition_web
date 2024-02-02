@@ -1,8 +1,9 @@
+import math
+
 from django.db import models
 from django.utils.text import slugify
 
 from admin.foodmanage.models import Food
-
 
 
 # Create your models here.
@@ -40,9 +41,21 @@ class FoodArticle(models.Model):
             obj.save()
             print(obj.slug_id)
 
+    @staticmethod
+    def calculate_min_read(content):
+        words_per_minute = 200  # Adjust this value based on your target audience
+        word_count = len(content.split())
+        min_read = math.ceil(word_count / words_per_minute)
+        return min_read
+
+    @property
+    def min_read(self):
+        return self.calculate_min_read(self.content)
+
 
 class FoodArticleComment(models.Model):
-    foodarticle = models.ForeignKey(FoodArticle, models.DO_NOTHING, db_column='FoodArticle_id')  # Field name made lowercase.
+    foodarticle = models.ForeignKey(FoodArticle, models.DO_NOTHING,
+                                    db_column='FoodArticle_id')  # Field name made lowercase.
     content = models.TextField()
     rate = models.IntegerField(blank=True, null=True)
     created_date = models.DateTimeField(auto_now_add=True)

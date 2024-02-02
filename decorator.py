@@ -21,7 +21,7 @@ class require:
                     return func(request, *args, **kwargs)
             except KeyError:
                 pass
-            return redirect('admin_login')
+            return redirect('admin:login')
 
         return wrapper
 
@@ -31,7 +31,7 @@ class require:
             if not request.session['user_id']:
                 return func(request, *args, **kwargs)
             else:
-                return redirect('user_login')
+                return redirect('user:login')
 
         return wrapper
 

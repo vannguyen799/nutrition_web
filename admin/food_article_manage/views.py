@@ -21,7 +21,7 @@ def index(request):
         items = paginator.page(1)
     except EmptyPage:
         items = paginator.page(paginator.num_pages)
-    return render(request, 'admin/foodmanage/food_article_index.html', {'articles': items})
+    return render(request, 'admin/food_article/food_article_index.html', {'articles': items})
 
 
 @require.admin
